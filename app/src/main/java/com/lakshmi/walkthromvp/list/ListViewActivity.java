@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.lakshmi.walkthromvp.R;
@@ -20,6 +21,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,6 +35,9 @@ public class ListViewActivity extends Activity {
     @BindView(R.id.listview)
     ListView listview;
 
+    ArrayList<String> arname=new ArrayList<>();
+
+    ArrayAdapter aa;
 
 
     @Override
@@ -41,19 +46,22 @@ public class ListViewActivity extends Activity {
         setContentView(R.layout.activity_listactivity);
         ButterKnife.bind(this);
 
+
+
+
         new CallAsyncTask().execute();
     }
 
-    private class CallAsyncTask extends AsyncTask<Void,String,String>{
+    private class CallAsyncTask extends AsyncTask<Void, String, String> {
 
 
         @Override
         protected String doInBackground(Void... params) {
 
             try {
-                URL url=new URL("https://api.learn2crack.com/android/json/");
-                HttpURLConnection con= (HttpURLConnection) url.openConnection();
-                InputStream is=con.getInputStream();
+                URL url = new URL("https://api.learn2crack.com/android/json/");
+                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                InputStream is = con.getInputStream();
                 return readStream(is);
 
             } catch (MalformedURLException e) {
@@ -68,9 +76,28 @@ public class ListViewActivity extends Activity {
         protected void onPostExecute(String str) {
             super.onPostExecute(str);
 
-            Log.d("Lakshmi","This is str  "+str);
+            Log.d("Lakshmi", "This is str  " + str);
+            try {
+                JSONObject jobj = new JSONObject(str);
+                JSONArray jarray = jobj.getJSONArray("user");
+                for (int i = 0; i < jarray.length(); i++) {
+                //    for (int i = 0; i < 10; i++) {
+                    JSONObject jsonObject = jarray.getJSONObject(i);
+
+                    String id = jsonObject.getString("id");
+                    String name = jsonObject.getString("name");
+                    String email = jsonObject.getString("email");
+                    Log.d("Lakshmi", "This is name " + name);
+                    arname.add(name);
 
 
+                }
+                aa=new ArrayAdapter(ListViewActivity.this,android.R.layout.simple_list_item_1,arname);
+                listview.setAdapter(aa);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
 
         }
