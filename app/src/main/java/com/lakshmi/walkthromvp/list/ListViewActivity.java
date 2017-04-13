@@ -81,14 +81,17 @@ public class ListViewActivity extends Activity {
                 JSONObject jobj = new JSONObject(str);
                 JSONArray jarray = jobj.getJSONArray("user");
                 for (int i = 0; i < jarray.length(); i++) {
-                //    for (int i = 0; i < 10; i++) {
+
                     JSONObject jsonObject = jarray.getJSONObject(i);
 
                     String id = jsonObject.getString("id");
                     String name = jsonObject.getString("name");
                     String email = jsonObject.getString("email");
                     Log.d("Lakshmi", "This is name " + name);
-                    arname.add(name);
+
+                    for (int j = 0; j < 10; j++) {
+                        arname.add(name);
+                    }
 
 
                 }
