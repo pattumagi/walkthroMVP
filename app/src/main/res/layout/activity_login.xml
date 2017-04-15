@@ -7,6 +7,9 @@
     tools:context="com.lakshmi.walkthromvp.login.LoginActivity"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height=""></LinearLayout>
 
     <EditText
         android:id="@+id/edt_username"

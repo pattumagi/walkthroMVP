@@ -22,7 +22,6 @@ public class LoginPresenter implements LoginContract.Presenter{
         String  uname= view.getUsername();
         String  pass=view.getPassword();
 
-
         if(uname.isEmpty()) view.setUsernameError();
 
         if(pass.isEmpty())  view.setPasswordError();

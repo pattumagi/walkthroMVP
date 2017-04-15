@@ -10,5 +10,7 @@ public interface SplashContract {
 
         void gotoMain();
 
+        void callMain();
+
 
 }

@@ -10,12 +10,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.lakshmi.walkthromvp.R;
+import com.lakshmi.walkthromvp.base.BaseActivity;
 import com.lakshmi.walkthromvp.list.ListViewActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class LoginActivity extends Activity implements LoginContract.View, View.OnClickListener {
+public class LoginActivity extends BaseActivity implements LoginContract.View, View.OnClickListener {
     @BindView(R.id.edt_username)
     EditText edt_username;
     @BindView(R.id.edt_password)
