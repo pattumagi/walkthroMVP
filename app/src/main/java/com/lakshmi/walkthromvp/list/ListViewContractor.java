@@ -11,6 +11,7 @@ public class ListViewContractor {
     interface View{
 
         void setadapterListView( ArrayList<String> arname);
+        void callNextView();
 
     }
 
@@ -20,6 +21,6 @@ public class ListViewContractor {
 
         void callPostExecute(String str);
 
-
+        void callNextView();
     }
 }

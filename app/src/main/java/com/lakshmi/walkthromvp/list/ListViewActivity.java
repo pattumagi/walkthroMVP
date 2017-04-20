@@ -1,26 +1,17 @@
 package com.lakshmi.walkthromvp.list;
 
 import android.app.Activity;
-import android.os.AsyncTask;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.lakshmi.walkthromvp.R;
+import com.lakshmi.walkthromvp.tutorial.TutorialActivity;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -34,6 +25,8 @@ public class ListViewActivity extends Activity implements ListViewContractor.Vie
 
     @BindView(R.id.listview)
     ListView listview;
+    @BindView(R.id.btn_widgets)
+    Button btn_widgets;
 
     ListViewPresenter presenter;
 
@@ -43,17 +36,30 @@ public class ListViewActivity extends Activity implements ListViewContractor.Vie
         setContentView(R.layout.activity_listactivity);
         ButterKnife.bind(this);
 
-         presenter=new ListViewPresenter(this);
-         presenter.callAsyncTask();
+        presenter = new ListViewPresenter(this);
+        presenter.callAsyncTask();
+
+        btn_widgets.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.callNextView();
+            }
+        });
 
     }
 
     @Override
-    public void setadapterListView( ArrayList<String> arname) {
+    public void setadapterListView(ArrayList<String> arname) {
 
-        ArrayAdapter aa=new ArrayAdapter(ListViewActivity.this,android.R.layout.simple_list_item_1,arname);
+        ArrayAdapter aa = new ArrayAdapter(ListViewActivity.this, android.R.layout.simple_list_item_1, arname);
         listview.setAdapter(aa);
 
+    }
+
+    @Override
+    public void callNextView() {
+        Intent intent = new Intent(this, TutorialActivity.class);
+        startActivity(intent);
     }
 
 

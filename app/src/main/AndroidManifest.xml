@@ -21,6 +21,7 @@
         </activity>
         <activity android:name=".login.LoginActivity"></activity>
         <activity android:name=".list.ListViewActivity"></activity>
+        <activity android:name=".tutorial.TutorialActivity"></activity>
 
     </application>
 

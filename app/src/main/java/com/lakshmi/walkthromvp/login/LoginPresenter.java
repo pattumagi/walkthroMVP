@@ -8,10 +8,10 @@ import android.widget.EditText;
 
 public class LoginPresenter implements LoginContract.Presenter{
 
-   LoginActivity view;
+   LoginContract.View view;
 
 
-    public LoginPresenter(LoginActivity view) {
+    public LoginPresenter(LoginContract.View view) {
        this.view=view;
 
     }

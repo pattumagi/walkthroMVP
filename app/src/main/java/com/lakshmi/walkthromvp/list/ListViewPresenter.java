@@ -59,4 +59,9 @@ public class ListViewPresenter implements ListViewContractor.Presenter {
         }
 
     }
+
+    @Override
+    public void callNextView() {
+        view.callNextView();
+    }
 }

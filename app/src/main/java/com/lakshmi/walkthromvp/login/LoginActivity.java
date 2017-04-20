@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.lakshmi.walkthromvp.R;
@@ -23,6 +25,10 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, V
     EditText edt_password;
     @BindView(R.id.btn_submit)
     Button btn_submit;
+    @BindView(R.id.actualview)
+    LinearLayout actualview;
+    @BindView(R.id.btn_error)
+    Button btn_error;
 
     LoginPresenter presenter;
 
