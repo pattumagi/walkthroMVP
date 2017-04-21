@@ -9,7 +9,7 @@ import android.widget.Button;
 
 import com.lakshmi.walkthromvp.R;
 import com.lakshmi.walkthromvp.base.BaseActivity;
-import com.lakshmi.walkthromvp.common.AppConstanse;
+import com.lakshmi.walkthromvp.common.AppConstants;
 import com.lakshmi.walkthromvp.common.PageIndicator;
 
 import butterknife.BindView;
@@ -61,7 +61,7 @@ public class TutorialActivity extends BaseActivity implements TutorialContract.V
 
 
             // changing the next button text 'NEXT' / 'GOT IT'
-            AppConstanse.VIEW_INDICATOR_INDEX = position;
+            AppConstants.VIEW_INDICATOR_INDEX = position;
             pageIndicator.setUpView(TutorialActivity.this);
 
             if (position == layouts.length - 1) {

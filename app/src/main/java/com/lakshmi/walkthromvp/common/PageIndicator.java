@@ -22,9 +22,9 @@ public class PageIndicator extends LinearLayout {
 
     public void setUpView(Context context) {
         this.removeAllViews();
-        for (int i = 0; i <= AppConstanse.TOTAL_VIEWS_COUNT_FOR_INDICATOR; i++) {
+        for (int i = 0; i <= AppConstants.TOTAL_VIEWS_COUNT_FOR_INDICATOR; i++) {
             ImageView imageView = new ImageView(context);
-            if (i == AppConstanse.VIEW_INDICATOR_INDEX)
+            if (i == AppConstants.VIEW_INDICATOR_INDEX)
                 imageView.setImageResource(R.drawable.ic_indicator_active);
             else
                 imageView.setImageResource(R.drawable.ic_indicator_inactive);

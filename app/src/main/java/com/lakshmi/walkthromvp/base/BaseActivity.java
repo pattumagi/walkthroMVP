@@ -1,12 +1,14 @@
 package com.lakshmi.walkthromvp.base;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.LayoutRes;
@@ -18,6 +20,8 @@ import android.widget.RelativeLayout;
 
 
 import com.lakshmi.walkthromvp.R;
+import com.lakshmi.walkthromvp.common.DeviceDetailsSingleton;
+import com.lakshmi.walkthromvp.splash.SplashScreenActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,6 +40,7 @@ public class BaseActivity extends AppCompatActivity {
     RelativeLayout noConnectionLayout;
 
     ConnectivityManager connectivityManager;
+    ProgressDialog mProgressDialog;
 
     private BroadcastReceiver networkDetectReceiver = new BroadcastReceiver() {
         @Override
@@ -84,6 +89,10 @@ public class BaseActivity extends AppCompatActivity {
 
         connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
+        if (!(this instanceof SplashScreenActivity) && DeviceDetailsSingleton.getInstance() == null) {
+            DeviceDetailsSingleton.init(getApplicationContext());
+        }
+
     }
 
     @Override
@@ -100,4 +109,29 @@ public class BaseActivity extends AppCompatActivity {
 
     }
 
+    public boolean isEmulator() {
+        return Build.FINGERPRINT.startsWith("generic")
+                || Build.FINGERPRINT.startsWith("unknown")
+                || Build.MODEL.contains("google_sdk")
+                || Build.MODEL.contains("Emulator")
+                || Build.MODEL.contains("Android SDK built for x86")
+                || Build.MANUFACTURER.contains("Genymotion")
+                || (Build.BRAND.startsWith("generic") && Build.DEVICE.startsWith("generic"))
+                || "google_sdk".equals(Build.PRODUCT);
+    }
+
+
+    public void showProgressDialog(String message) {
+        if (mProgressDialog != null) {
+            mProgressDialog.show();
+            mProgressDialog.setMessage(message);
+        }
+    }
+
+
+    public void dismissProgressDialog() {
+        if (mProgressDialog != null) {
+            mProgressDialog.dismiss();
+        }
+    }
 }
