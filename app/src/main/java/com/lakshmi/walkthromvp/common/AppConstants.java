@@ -21,4 +21,5 @@ public class AppConstants {
     public static String MOBILE = "";
     public static final String PSPSCODE = "123";
     public static final String MOBILE_NUMBER = "mobileNo";
+    public static final int SPLASH_PERMISSION = 1004;
 }

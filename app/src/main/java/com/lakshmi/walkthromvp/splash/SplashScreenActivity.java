@@ -1,10 +1,14 @@
 package com.lakshmi.walkthromvp.splash;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -15,6 +19,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.safetynet.SafetyNet;
 import com.lakshmi.walkthromvp.base.BaseActivity;
+import com.lakshmi.walkthromvp.common.AppConstants;
 import com.lakshmi.walkthromvp.common.DeviceDetailsSingleton;
 import com.lakshmi.walkthromvp.common.LogUtil;
 import com.lakshmi.walkthromvp.login.LoginActivity;
@@ -29,6 +34,7 @@ import butterknife.BindView;
 public class SplashScreenActivity extends BaseActivity implements SplashContract.View, GoogleApiClient.OnConnectionFailedListener {
 
 
+    private static final int REQUEST_READ_PHONE_STATE = 101;
     SplashPresenter presenter;
     @BindView(R.id.actualview)
     RelativeLayout actualview;
@@ -37,11 +43,12 @@ public class SplashScreenActivity extends BaseActivity implements SplashContract
     GoogleApiClient googleApiClient;
     private String TAG = getClass().getSimpleName();
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splashscreen);
-
+        //checkForPermission();
         presenter = new SplashPresenter(this);
         presenter.callView();
         buildGoogleApiClient();
@@ -98,6 +105,40 @@ public class SplashScreenActivity extends BaseActivity implements SplashContract
 
     }
 
+    @Override
+    public void checkForPermission() {
+//        String[] permissions = new String[]{Manifest.permission.SEND_SMS, Manifest.permission.READ_PHONE_STATE};
+//
+//        if (hasPermissions(permissions, AppConstants.SPLASH_PERMISSION)) {
+//            //proceedProcess();
+//            callMain();
+//
+//        }
+
+        int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE);
+
+        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE}, REQUEST_READ_PHONE_STATE);
+        } else {
+            //TODO
+            callMain();
+        }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_READ_PHONE_STATE:
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission granted!
+                    // you may now do the action that requires this permission
+                } else {
+                    // permission denied
+                }
+                return;
+        }
+
+    }
 
     @Override
     public void onUnStableConnection(int reasonFlag) {

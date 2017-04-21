@@ -15,9 +15,11 @@ interface View extends BaseView{
 
         void callMain();
         void showErrorScreen(String messageRes);
+        void checkForPermission();
 }
 interface Presenter{
         void triggerSafetyNet(GoogleApiClient googleApiClient);
+
 }
 
 

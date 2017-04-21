@@ -6,13 +6,17 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -21,7 +25,11 @@ import android.widget.RelativeLayout;
 
 import com.lakshmi.walkthromvp.R;
 import com.lakshmi.walkthromvp.common.DeviceDetailsSingleton;
+import com.lakshmi.walkthromvp.common.LogUtil;
 import com.lakshmi.walkthromvp.splash.SplashScreenActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,6 +41,7 @@ import butterknife.ButterKnife;
 public class BaseActivity extends AppCompatActivity {
 
 
+    private String TAG = getClass().getSimpleName();
     @BindView(R.id.btn_error)
     Button btn_error;
 
@@ -134,4 +143,6 @@ public class BaseActivity extends AppCompatActivity {
             mProgressDialog.dismiss();
         }
     }
+
+
 }
