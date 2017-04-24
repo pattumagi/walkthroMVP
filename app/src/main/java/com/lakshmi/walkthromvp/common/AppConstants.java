@@ -22,4 +22,6 @@ public class AppConstants {
     public static final String PSPSCODE = "123";
     public static final String MOBILE_NUMBER = "mobileNo";
     public static final int SPLASH_PERMISSION = 1004;
+    public static final String list_url="https://api.learn2crack.com/android/json/";
+    public static final String recycle_url="http://api.androidhive.info/contacts/";
 }

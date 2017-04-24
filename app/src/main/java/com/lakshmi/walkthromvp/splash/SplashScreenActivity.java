@@ -48,7 +48,7 @@ public class SplashScreenActivity extends BaseActivity implements SplashContract
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splashscreen);
-        //checkForPermission();
+      //  checkForPermission();
         presenter = new SplashPresenter(this);
         presenter.callView();
         buildGoogleApiClient();
@@ -100,7 +100,7 @@ public class SplashScreenActivity extends BaseActivity implements SplashContract
 
     @Override
     public void showErrorScreen(String messageRes) {
-        Toast.makeText(this,messageRes,Toast.LENGTH_LONG).show();
+        Toast.makeText(this, messageRes, Toast.LENGTH_LONG).show();
 
 
     }
@@ -115,27 +115,53 @@ public class SplashScreenActivity extends BaseActivity implements SplashContract
 //
 //        }
 
-        int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE);
+//        int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE);
+//
+//        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE}, REQUEST_READ_PHONE_STATE);
+//        } else {
+//            //TODO
+//            callMain();
+//        }
 
-        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE}, REQUEST_READ_PHONE_STATE);
-        } else {
-            //TODO
+        //First checking if the app is already having the permission
+        if (isReadStorageAllowed()) {
+            //If permission is  there already
             callMain();
+            //Existing the method with return
+            return;
         }
+
+        //If the app has not the permission then asking for the permission
+        requestStoragePermission();
     }
+
+    //We are calling this method to check the permission status
+    private boolean isReadStorageAllowed() {
+        //Getting the permission status
+        int result = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE);
+
+        //If permission is granted returning true
+        if (result == PackageManager.PERMISSION_GRANTED)
+            return true;
+
+        //If permission is not granted returning false
+        return false;
+    }
+
+    //Requesting permission
+    private void requestStoragePermission() {
+
+        //And finally ask for the permission
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_READ_PHONE_STATE);
+    }
+
+
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case REQUEST_READ_PHONE_STATE:
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // permission granted!
-                    // you may now do the action that requires this permission
-                } else {
-                    // permission denied
-                }
-                return;
+
+        if (requestCode == REQUEST_READ_PHONE_STATE) {
+            callMain();
         }
 
     }

@@ -1,12 +1,19 @@
 package com.lakshmi.walkthromvp.list;
 
 import android.util.Log;
+
+import com.lakshmi.walkthromvp.common.AppConstants;
+import com.lakshmi.walkthromvp.recyclerexample.recyclerPOJO;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 
 import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.internal.Utils;
 
 /**
  * Created by mgs1899 on 4/13/2017.
@@ -27,13 +34,13 @@ public class ListViewPresenter implements ListViewContractor.Presenter {
     public void callAsyncTask() {
 
 
-       new CallAsyncTask(this).execute();
+       new CallAsyncTask(this, AppConstants.list_url).execute();
 
     }
 
     @Override
     public void callPostExecute(String str) {
-        ArrayList arname=new ArrayList<>();
+        ArrayList arname = new ArrayList<>();
         Log.d("Lakshmi", "This is str  " + str);
         try {
             JSONObject jobj = new JSONObject(str);
@@ -57,7 +64,6 @@ public class ListViewPresenter implements ListViewContractor.Presenter {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
@@ -65,3 +71,4 @@ public class ListViewPresenter implements ListViewContractor.Presenter {
         view.callNextView();
     }
 }
+

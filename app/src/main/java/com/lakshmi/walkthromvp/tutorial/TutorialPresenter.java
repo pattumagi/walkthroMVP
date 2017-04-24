@@ -21,6 +21,12 @@ public class TutorialPresenter implements TutorialContract.Presenter {
 
     }
 
+    @Override
+    public void callRecycle() {
+        view.callRecyvlerView();
+    }
+
+
 
 
 }

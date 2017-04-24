@@ -1,13 +1,8 @@
-package com.lakshmi.walkthromvp.list;
+package com.lakshmi.walkthromvp.recyclerexample;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
-import com.lakshmi.walkthromvp.login.LoginContract;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.lakshmi.walkthromvp.list.ListViewContractor;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,18 +11,17 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 
 /**
  * Created by mgs1899 on 4/15/2017.
  */
 
-public class CallAsyncTask extends AsyncTask<Void, String, String>  {
-    ListViewContractor.Presenter view;
+public class CallRecyclerAsyncTask extends AsyncTask<Void, String, String>  {
+    RecyclerContract.Presenter view;
     String str_url;
 
 
-    public CallAsyncTask(ListViewContractor.Presenter view,String url) {
+    public CallRecyclerAsyncTask(RecyclerContract.Presenter view, String url) {
         this.view=view;
        str_url=url;
     }

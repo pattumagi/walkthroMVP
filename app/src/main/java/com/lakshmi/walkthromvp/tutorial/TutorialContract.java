@@ -9,6 +9,7 @@ public class TutorialContract {
     interface View{
 
         void setViewPager();
+        void callRecyvlerView();
 
 
     }
@@ -17,5 +18,6 @@ public class TutorialContract {
         void setViewPager();
 
 
+        void callRecycle();
     }
 }
